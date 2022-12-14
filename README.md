@@ -54,3 +54,70 @@ interface Transaction {
 }
 
 ```
+
+#### extend
+
+```javascript
+
+interface Account {
+  accountNumber: number;
+  balance: number;
+  name: string;
+  transactions: Array<Transaction>;
+}
+
+interface user extends Account {
+  name: string;
+}
+
+```
+
+#### merge interfaces
+- same name interface will merge automatically but in type it will throw duplicate identifier errors
+- for prototype only use type 
+
+
+#### Unions
+
+```javascript
+type UserId = number | string;
+```
+#### Narrowing
+
+```javascript
+type UserId = number | string;
+
+function printId(id: UserId) {
+  if (typeof id === "string") {
+    console.log(id.toUpperCase());
+  } else {
+    console.log(id);
+  }
+}
+
+printId('1');
+
+```
+
+#### Generics
+```javascript
+function logString(arg: string) {
+    console.log(arg);
+    return arg;
+}
+```
+
+```javascript
+
+interface HasAge {
+    age: number;
+}
+
+function getOldest<T extends HasAge>(people: T[]): T {
+    return people.sort((a, b) => b.age - a.age)[0];
+}
+
+const people = [{ age: 30 }, { age: 40 }, { age: 10 }];
+
+getOldest(people)
+```

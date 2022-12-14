@@ -95,6 +95,7 @@ const User: user = {
 
 //Unions
 type UserId = number | string;
+
 // Narrowing
 function printId(id: UserId) {
   if (typeof id === "string") {
@@ -119,3 +120,15 @@ function logString(arg: string) {
     return arg;
 }
 
+
+interface HasAge {
+    age: number;
+}
+
+function getOldest<T extends HasAge>(people: T[]): T {
+    return people.sort((a, b) => b.age - a.age)[0];
+}
+
+const people = [{ age: 30 }, { age: 40 }, { age: 10 }];
+
+getOldest(people)
